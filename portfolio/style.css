@@ -1,0 +1,132 @@
+/* Basic Page */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f6f8;
+  color: #222;
+}
+
+/* Header */
+
+header {
+  background-color: #263445;
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 40px;
+}
+
+header p {
+  font-size: 20px;
+  margin: 10px 0 20px;
+}
+
+/* Navigation */
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Sections */
+
+section {
+  background-color: white;
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #cccccc;
+}
+
+/* Section headings */
+
+section h2 {
+  font-size: 30px;
+  margin-top: 0;
+  border-bottom: 3px solid #287be0;
+  padding-bottom: 8px;
+}
+
+/* Profile Image */
+
+#about img {
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 20px auto;
+}
+
+/* Paragraphs */
+
+section p {
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* Skills */
+
+#skills ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#skills li {
+  display: inline-block;
+  background-color: #e6f1ff;
+  padding: 10px 20px;
+  margin: 6px;
+  border-radius: 20px;
+}
+
+/* Contact Links */
+
+#contact a {
+  color: #287be0;
+}
+
+/* Footer */
+
+footer {
+  background-color: #263445;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+/* Mobile View */
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 30px;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 5px;
+  }
+
+  section {
+    margin: 15px;
+    padding: 20px;
+  }
+
+  #about img {
+    width: 140px;
+    height: 140px;
+  }
+}
