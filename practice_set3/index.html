@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Week 3 - JavaScript Fundamentals</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #dbeafe, #fce7f3, #fef3c7);
+        color: #222;
+      }
+
+      /* HEADER */
+
+      header {
+        background: linear-gradient(135deg, #4f46e5, #9333ea);
+        color: white;
+        text-align: center;
+        padding: 45px 20px;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 40px;
+      }
+
+      header p {
+        font-size: 19px;
+        margin-top: 10px;
+      }
+
+      /* MAIN */
+
+      main {
+        max-width: 1000px;
+        margin: 35px auto;
+        padding: 0 20px;
+      }
+
+      /* QUESTION CARDS */
+
+      .question-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+      }
+
+      .question-card {
+        background: white;
+        border-radius: 18px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+
+        cursor: pointer;
+
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+
+      .question-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .question-card h2 {
+        margin-top: 10px;
+      }
+
+      .question-card p {
+        color: #666;
+      }
+
+      /* CARD COLORS */
+
+      .card1 {
+        border-top: 6px solid #3b82f6;
+      }
+
+      .card2 {
+        border-top: 6px solid #ec4899;
+      }
+
+      .card3 {
+        border-top: 6px solid #10b981;
+      }
+
+      .card4 {
+        border-top: 6px solid #f59e0b;
+      }
+
+      /* OPEN BUTTON */
+
+      .open-button {
+        border: none;
+        padding: 12px 22px;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        font-size: 15px;
+      }
+
+      .blue {
+        background-color: #3b82f6;
+      }
+
+      .pink {
+        background-color: #ec4899;
+      }
+
+      .green {
+        background-color: #10b981;
+      }
+
+      .orange {
+        background-color: #f59e0b;
+      }
+
+      /* EXERCISE AREA */
+
+      .exercise {
+        display: none;
+
+        background-color: white;
+
+        margin-top: 25px;
+        padding: 30px;
+
+        border-radius: 18px;
+
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+
+        animation: openBox 0.4s ease;
+      }
+
+      @keyframes openBox {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .exercise h2 {
+        color: #4338ca;
+      }
+
+      /* INPUTS */
+
+      input,
+      select {
+        width: 100%;
+        padding: 12px;
+
+        margin: 8px 0;
+
+        border: 2px solid #ddd;
+
+        border-radius: 8px;
+
+        font-size: 16px;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #6366f1;
+        outline: none;
+      }
+
+      /* ACTION BUTTON */
+
+      .action-button {
+        border: none;
+
+        padding: 12px 20px;
+
+        margin-top: 8px;
+
+        border-radius: 8px;
+
+        color: white;
+
+        background-color: #4f46e5;
+
+        cursor: pointer;
+
+        font-size: 16px;
+      }
+
+      .action-button:hover {
+        background-color: #3730a3;
+      }
+
+      /* CLOSE BUTTON */
+
+      .close-button {
+        float: right;
+
+        border: none;
+
+        background-color: #ef4444;
+
+        color: white;
+
+        padding: 8px 14px;
+
+        border-radius: 6px;
+
+        cursor: pointer;
+      }
+
+      /* RESULT */
+
+      .result {
+        margin-top: 18px;
+
+        padding: 15px;
+
+        border-radius: 10px;
+
+        background-color: #f1f5f9;
+
+        font-weight: bold;
+
+        min-height: 20px;
+      }
+
+      /* COLOR DISPLAY */
+
+      #colorDisplay {
+        margin-top: 20px;
+
+        padding: 25px;
+
+        border-radius: 12px;
+
+        text-align: center;
+
+        color: white;
+
+        background-color: #64748b;
+
+        font-size: 20px;
+
+        font-weight: bold;
+      }
+
+      /* DATE */
+
+      #dateDisplay {
+        background: linear-gradient(135deg, #f59e0b, #ef4444);
+
+        color: white;
+
+        padding: 25px;
+
+        border-radius: 12px;
+
+        text-align: center;
+
+        font-size: 22px;
+
+        font-weight: bold;
+      }
+
+      /* FOOTER */
+
+      footer {
+        background-color: #312e81;
+
+        color: white;
+
+        text-align: center;
+
+        padding: 22px;
+
+        margin-top: 40px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 700px) {
+        .question-grid {
+          grid-template-columns: 1fr;
+        }
+
+        header h1 {
+          font-size: 30px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+
+    <header>
+      <h1>💻 JavaScript Fundamentals</h1>
+
+      <p>Week 3 Interactive Practice Set</p>
+    </header>
+
+    <main>
+      <!-- QUESTION CARDS -->
+
+      <div class="question-grid">
+        <!-- QUESTION 1 -->
+
+        <div class="question-card card1" onclick="openExercise('exercise1')">
+          <div style="font-size: 45px">🔢</div>
+
+          <h2>Even or Odd</h2>
+
+          <p>Check whether a number is even or odd.</p>
+
+          <button class="open-button blue">Open Exercise</button>
+        </div>
+
+        <!-- QUESTION 2 -->
+
+        <div class="question-card card2" onclick="openExercise('exercise2')">
+          <div style="font-size: 45px">🎨</div>
+
+          <h2>Color Changer</h2>
+
+          <p>Change the color and see its name.</p>
+
+          <button class="open-button pink">Open Exercise</button>
+        </div>
+
+        <!-- QUESTION 3 -->
+
+        <div class="question-card card3" onclick="openExercise('exercise3')">
+          <div style="font-size: 45px">🧮</div>
+
+          <h2>Calculator</h2>
+
+          <p>Perform basic mathematical operations.</p>
+
+          <button class="open-button green">Open Exercise</button>
+        </div>
+
+        <!-- QUESTION 4 -->
+
+        <div class="question-card card4" onclick="openExercise('exercise4')">
+          <div style="font-size: 45px">📅</div>
+
+          <h2>Date & Time</h2>
+
+          <p>View the current date and time.</p>
+
+          <button class="open-button orange">Open Exercise</button>
+        </div>
+      </div>
+
+      <!-- =================================
+             EXERCISE 1
+        ================================== -->
+
+      <div class="exercise" id="exercise1">
+        <button class="close-button" onclick="closeExercise('exercise1')">
+          ✕ Close
+        </button>
+
+        <h2>🔢 Even or Odd Number Checker</h2>
+
+        <p>Enter a number to find out whether it is even or odd.</p>
+
+        <input type="number" id="numberInput" placeholder="Enter a number" />
+
+        <br />
+
+        <button class="action-button" onclick="checkEvenOdd()">
+          Check Number
+        </button>
+
+        <div class="result" id="evenOddResult"></div>
+      </div>
+
+      <!-- =================================
+             EXERCISE 2
+        ================================== -->
+
+      <div class="exercise" id="exercise2">
+        <button class="close-button" onclick="closeExercise('exercise2')">
+          ✕ Close
+        </button>
+
+        <h2>🎨 Interactive Color Changer</h2>
+
+        <p>
+          Click the button to generate a random color. The color name and HEX
+          code will be displayed.
+        </p>
+
+        <button class="action-button" onclick="changeColor()">
+          🎨 Change Color
+        </button>
+
+        <div id="colorDisplay">Current Color: Slate Gray</div>
+      </div>
+
+      <!-- =================================
+             EXERCISE 3
+        ================================== -->
+
+      <div class="exercise" id="exercise3">
+        <button class="close-button" onclick="closeExercise('exercise3')">
+          ✕ Close
+        </button>
+
+        <h2>🧮 Simple Calculator</h2>
+
+        <input
+          type="number"
+          id="firstNumber"
+          placeholder="Enter first number"
+        />
+
+        <input
+          type="number"
+          id="secondNumber"
+          placeholder="Enter second number"
+        />
+
+        <select id="operation">
+          <option value="add">➕ Addition</option>
+
+          <option value="subtract">➖ Subtraction</option>
+
+          <option value="multiply">✖️ Multiplication</option>
+
+          <option value="divide">➗ Division</option>
+        </select>
+
+        <button class="action-button" onclick="calculate()">Calculate</button>
+
+        <div class="result" id="calculatorResult"></div>
+      </div>
+
+      <!-- =================================
+             EXERCISE 4
+        ================================== -->
+
+      <div class="exercise" id="exercise4">
+        <button class="close-button" onclick="closeExercise('exercise4')">
+          ✕ Close
+        </button>
+
+        <h2>📅 Dynamic Date & Time</h2>
+
+        <div id="dateDisplay"></div>
+      </div>
+    </main>
+
+    <footer>
+      <p>🌟 Week 3 JavaScript Practice | Keerthi K M</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+      /* ==================================
+           OPEN EXERCISE
+        ================================== */
+
+      function openExercise(id) {
+        // Close all exercises first
+
+        let exercises = document.querySelectorAll(".exercise");
+
+        exercises.forEach(function (exercise) {
+          exercise.style.display = "none";
+        });
+
+        // Open selected exercise
+
+        let selected = document.getElementById(id);
+
+        selected.style.display = "block";
+
+        // Scroll to the exercise
+
+        selected.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+
+      /* ==================================
+           CLOSE EXERCISE
+        ================================== */
+
+      function closeExercise(id) {
+        document.getElementById(id).style.display = "none";
+      }
+
+      /* ==================================
+           QUESTION 1
+           EVEN OR ODD
+        ================================== */
+
+      function checkEvenOdd() {
+        let number = document.getElementById("numberInput").value;
+
+        let result = document.getElementById("evenOddResult");
+
+        if (number === "") {
+          result.innerHTML = "⚠️ Please enter a number.";
+
+          result.style.backgroundColor = "#fee2e2";
+
+          return;
+        }
+
+        if (number % 2 === 0) {
+          result.innerHTML = "✅ " + number + " is an EVEN number.";
+
+          result.style.backgroundColor = "#dcfce7";
+        } else {
+          result.innerHTML = "🔵 " + number + " is an ODD number.";
+
+          result.style.backgroundColor = "#dbeafe";
+        }
+      }
+
+      /* ==================================
+           QUESTION 2
+           COLOR CHANGER
+        ================================== */
+
+      function changeColor() {
+        let colors = [
+          {
+            name: "Crimson Red",
+            code: "#DC143C",
+          },
+
+          {
+            name: "Royal Blue",
+            code: "#4169E1",
+          },
+
+          {
+            name: "Medium Sea Green",
+            code: "#3CB371",
+          },
+
+          {
+            name: "Dark Orange",
+            code: "#FF8C00",
+          },
+
+          {
+            name: "Purple",
+            code: "#800080",
+          },
+
+          {
+            name: "Deep Pink",
+            code: "#FF1493",
+          },
+
+          {
+            name: "Teal",
+            code: "#008080",
+          },
+
+          {
+            name: "Gold",
+            code: "#FFD700",
+          },
+        ];
+
+        let randomIndex = Math.floor(Math.random() * colors.length);
+
+        let selectedColor = colors[randomIndex];
+
+        let display = document.getElementById("colorDisplay");
+
+        display.style.backgroundColor = selectedColor.code;
+
+        display.innerHTML =
+          "🎨 " +
+          selectedColor.name +
+          "<br>" +
+          "<small>" +
+          selectedColor.code +
+          "</small>";
+      }
+
+      /* ==================================
+           QUESTION 3
+           CALCULATOR
+        ================================== */
+
+      function calculate() {
+        let first = parseFloat(document.getElementById("firstNumber").value);
+
+        let second = parseFloat(document.getElementById("secondNumber").value);
+
+        let operation = document.getElementById("operation").value;
+
+        let result = document.getElementById("calculatorResult");
+
+        if (isNaN(first) || isNaN(second)) {
+          result.innerHTML = "⚠️ Please enter both numbers.";
+
+          result.style.backgroundColor = "#fee2e2";
+
+          return;
+        }
+
+        let answer;
+
+        if (operation === "add") {
+          answer = first + second;
+        } else if (operation === "subtract") {
+          answer = first - second;
+        } else if (operation === "multiply") {
+          answer = first * second;
+        } else if (operation === "divide") {
+          if (second === 0) {
+            result.innerHTML = "❌ Cannot divide by zero.";
+
+            result.style.backgroundColor = "#fee2e2";
+
+            return;
+          }
+
+          answer = first / second;
+        }
+
+        result.innerHTML = "✅ Result: " + answer;
+
+        result.style.backgroundColor = "#dcfce7";
+      }
+
+      /* ==================================
+           QUESTION 4
+           DATE & TIME
+        ================================== */
+
+      function displayDateTime() {
+        let currentDate = new Date();
+
+        document.getElementById("dateDisplay").innerHTML =
+          "🕒 " + currentDate.toLocaleString();
+      }
+
+      displayDateTime();
+
+      setInterval(displayDateTime, 1000);
+    </script>
+  </body>
+</html>
